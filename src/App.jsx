@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useState } from "react";
 import "./App.css";
 
@@ -25,7 +26,7 @@ function App() {
     setTextareas([...textareas, { value: "" }]);
   };
 
-  const handleRemoveTextarea = (index) => {
+  const handleRemoveTextarea = index => {
     const newValues = textareas.filter((_, i) => i !== index);
     setTextareas(newValues);
   };
@@ -78,70 +79,115 @@ function App() {
   };
 
   return (
-    <div className='relative overflow-x-auto'>
-      <h1>JSON Combiner App</h1>
-      <table className='w-full text-sm text-left text-gray-500 dark:text-gray-400'>
-        <thead className='text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400'>
-          <tr>
-            <th scope='col' className='px-6 py-3 border '>
-              Field No.
-            </th>
-            <th scope='col' className='px-6 py-3 border '>
-              JSON Text
-            </th>
-            <th scope='col' className='px-6 py-3 border'>
-              Actions
-            </th>
-          </tr>
-        </thead>
-        <tbody className='bg-white border-b dark:bg-gray-800 dark:border-gray-700'>
-          {textareas.map((textarea, index) => (
-            <tr key={index}>
-              <td
-                scope='row'
-                className='px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white border'>
-                {index + 1}
-              </td>
-              <td
-                scope='row'
-                className={`px-6 py-4 font-medium whitespace-nowrap dark:text-white border ${
-                  textarea.valid ? "" : "border-red-500"
-                }`}>
-                <textarea
-                  className={`p-[10px] ${
-                    textarea.valid ? "" : "border-red-500"
-                  }`}
-                  value={textarea.value}
-                  rows={5}
-                  placeholder='Enter valid JSON here'
-                  onChange={(e) => handleTextareaChange(index, e.target.value)}
-                />
-                {!textarea.valid && (
-                  <div className='text-red-500 mt-1'>Invalid JSON format</div>
-                )}
-              </td>
-              <td
-                scope='row'
-                className='px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white border'>
-                {textareas.length > 1 && (
-                  <button onClick={() => handleRemoveTextarea(index)}>
-                    Remove Textarea
-                  </button>
-                )}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <>
+      <div className='container mx-auto'>
+        {/* Title text */}
+        <h1 className='text-white text-4xl lg:text-3xl font-bold text-center mt-9'>
+          JSON Combiner App
+        </h1>
+        <div className='overflow-x-auto mt-9'>
+          {/* Table */}
+          <table className='w-full table-auto border-separate border-spacing-1 border border-red-400 text-sm text-left text-gray-500 dark:text-gray-400'>
+            {/* Table head */}
+            <thead className='text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400'>
+              <tr>
+                <th
+                  scope='col'
+                  className='px-3 py-3 border border-green-300 text-lg text-green-600'>
+                  Field No.
+                </th>
+                <th
+                  scope='col'
+                  className='px-6 py-3 border border-green-300 text-lg text-green-600'>
+                  JSON Text Field
+                </th>
+                <th
+                  scope='col'
+                  className='px-3 py-3 border border-green-300 text-lg text-green-600'>
+                  Actions
+                </th>
+              </tr>
+            </thead>
+            <tbody className='bg-white border-b dark:bg-gray-800 dark:border-gray-700'>
+              {textareas.map((textarea, index) => (
+                <tr key={index}>
+                  <td
+                    scope='row'
+                    className='px-3 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white border border-orange-300'>
+                    {index + 1}
+                  </td>
+                  <td
+                    scope='row'
+                    className={`px-6 py-4 font-medium whitespace-nowrap dark:text-white border border-orange-300 ${
+                      textarea.valid ? "" : "border-red-500"
+                    }`}>
+                    <textarea
+                      className={`p-[10px] min-w-fit w-full min-h-[250px] h-full text-black ${
+                        textarea.valid ? "" : "border-red-500"
+                      }`}
+                      value={textarea.value}
+                      rows={5}
+                      placeholder='Enter valid JSON here'
+                      onChange={e =>
+                        handleTextareaChange(index, e.target.value)
+                      }
+                    />
+                    {!textarea.valid && (
+                      <div className='text-red-500 mt-1 text-center text-base'>
+                        Invalid JSON format
+                      </div>
+                    )}
+                  </td>
+                  <td
+                    scope='row'
+                    className='px-3 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white border border-orange-300'>
+                    {textareas.length > 1 && (
+                      <div className='text-center'>
+                        <button
+                          className='rounded-lg bg-red-500 p-5 text-white'
+                          onClick={() => handleRemoveTextarea(index)}>
+                          Remove Textarea
+                        </button>
+                      </div>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
 
-      <button onClick={handleAddTextarea}>Add New Textarea</button>
-      <button onClick={handleConvert}>Convert</button>
-      <button onClick={handleReset}>Reset All</button>
-      {downloadVisible && (
-        <button onClick={handleDownload}>Download JSON</button>
-      )}
-      {error && <div style={{ color: "red" }}>{error}</div>}
-    </div>
+          <div className='flex justify-center items-center mt-9 gap-x-1.5'>
+            <button
+              className='rounded-lg bg-cyan-500 p-5 text-white'
+              onClick={handleAddTextarea}>
+              Add New Textarea
+            </button>
+            <button
+              className='rounded-lg bg-blue-500 p-5 text-white'
+              onClick={handleConvert}>
+              Convert
+            </button>
+            <button
+              className='rounded-lg bg-orange-500 p-5 text-white'
+              onClick={handleReset}>
+              Reset All
+            </button>
+            {downloadVisible && (
+              <button
+                className='rounded-lg bg-green-500 p-5 text-white'
+                onClick={handleDownload}>
+                Download JSON
+              </button>
+            )}
+          </div>
+          {error && (
+            <div className='text-center text-red-800 my-9 font-semibold '>
+              {error}
+            </div>
+          )}
+        </div>
+      </div>
+    </>
   );
 }
 
