@@ -37,7 +37,11 @@ function App() {
     textareas.forEach(({ value }) => {
       try {
         const jsonData = JSON.parse(value);
-        json = [...json, ...jsonData]; // Merge the parsed JSON into the array
+        if (Array.isArray(jsonData)) {
+          json = [...json, ...jsonData];
+        } else {
+          json.push(jsonData);
+        }
       } catch (e) {
         setError("Invalid JSON format");
         isValid = false;
