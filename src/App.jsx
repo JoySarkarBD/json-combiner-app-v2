@@ -85,40 +85,40 @@ function App() {
         <h1 className='text-white text-4xl lg:text-3xl font-bold text-center mt-9'>
           JSON Combiner App
         </h1>
-        <div className='overflow-x-auto mt-9'>
+        <div className='table_section overflow-x-auto mt-9 '>
           {/* Table */}
-          <table className='w-full table-auto border-separate border-spacing-1 border border-red-400 text-sm text-left text-gray-500 dark:text-gray-400'>
+          <table className=' w-full border-separate border-spacing-1 border border-red-400 text-sm text-left text-gray-500 dark:text-gray-400 '>
             {/* Table head */}
-            <thead className='text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400'>
+            <thead className=' text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400'>
               <tr>
                 <th
                   scope='col'
-                  className='px-3 py-3 border border-green-300 text-lg text-green-600'>
+                  className='px-3 py-3 border border-green-300 text-lg text-green-600 w-2/12'>
                   Field No.
                 </th>
                 <th
                   scope='col'
-                  className='px-6 py-3 border border-green-300 text-lg text-green-600'>
+                  className='px-6 py-3 border border-green-300 text-lg text-green-600 w-7/12'>
                   JSON Text Field
                 </th>
                 <th
                   scope='col'
-                  className='px-3 py-3 border border-green-300 text-lg text-green-600'>
+                  className='px-3 py-3 border border-green-300 text-lg text-green-600 w-3/12'>
                   Actions
                 </th>
               </tr>
             </thead>
-            <tbody className='bg-white border-b dark:bg-gray-800 dark:border-gray-700'>
+            <tbody className=' bg-white border-b dark:bg-gray-800 dark:border-gray-700'>
               {textareas.map((textarea, index) => (
                 <tr key={index}>
                   <td
                     scope='row'
-                    className='px-3 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white border border-orange-300'>
+                    className='px-3 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white border border-orange-300 w-2/12'>
                     {index + 1}
                   </td>
                   <td
                     scope='row'
-                    className={`px-6 py-4 font-medium whitespace-nowrap dark:text-white border border-orange-300 ${
+                    className={`px-6 py-4 font-medium whitespace-nowrap dark:text-white border border-orange-300 w-7/12 ${
                       textarea.valid ? "" : "border-red-500"
                     }`}>
                     <textarea
@@ -138,9 +138,10 @@ function App() {
                       </div>
                     )}
                   </td>
+                  {/* Remove Button */}
                   <td
                     scope='row'
-                    className='px-3 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white border border-orange-300'>
+                    className='px-3 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white border border-orange-300 w-3/12'>
                     {textareas.length > 1 && (
                       <div className='text-center'>
                         <button
@@ -155,37 +156,38 @@ function App() {
               ))}
             </tbody>
           </table>
-
-          <div className='flex justify-center items-center mt-9 gap-x-1.5'>
+        </div>
+        {/* Button Groups */}
+        <div className='flex justify-center items-center mt-9 gap-x-1.5'>
+          <button
+            className='rounded-lg bg-cyan-500 p-5 text-white'
+            onClick={handleAddTextarea}>
+            Add New Textarea
+          </button>
+          <button
+            className='rounded-lg bg-blue-500 p-5 text-white'
+            onClick={handleConvert}>
+            Convert
+          </button>
+          <button
+            className='rounded-lg bg-orange-500 p-5 text-white'
+            onClick={handleReset}>
+            Reset All
+          </button>
+          {downloadVisible && (
             <button
-              className='rounded-lg bg-cyan-500 p-5 text-white'
-              onClick={handleAddTextarea}>
-              Add New Textarea
+              className='rounded-lg bg-green-500 p-5 text-white'
+              onClick={handleDownload}>
+              Download JSON
             </button>
-            <button
-              className='rounded-lg bg-blue-500 p-5 text-white'
-              onClick={handleConvert}>
-              Convert
-            </button>
-            <button
-              className='rounded-lg bg-orange-500 p-5 text-white'
-              onClick={handleReset}>
-              Reset All
-            </button>
-            {downloadVisible && (
-              <button
-                className='rounded-lg bg-green-500 p-5 text-white'
-                onClick={handleDownload}>
-                Download JSON
-              </button>
-            )}
-          </div>
-          {error && (
-            <div className='text-center text-red-800 my-9 font-semibold '>
-              {error}
-            </div>
           )}
         </div>
+        {/* Error msg */}
+        {error && (
+          <div className='text-center text-red-800 mt-9 font-semibold '>
+            {error}
+          </div>
+        )}
       </div>
     </>
   );
