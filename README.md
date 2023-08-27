@@ -32,7 +32,7 @@ Start the development server using the following command:
 
 ## Access Your Project
 
-After running the development server, you can access your project in your browser at `http://localhost:5000/`.
+After running the development server, you can access your project in your browser at `http://localhost:5050/`.
 
 ## Conclusion
 
