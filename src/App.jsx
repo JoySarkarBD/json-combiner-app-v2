@@ -26,7 +26,7 @@ function App() {
     setTextareas([...textareas, { value: "" }]);
   };
 
-  const handleRemoveTextarea = index => {
+  const handleRemoveTextarea = (index) => {
     const newValues = textareas.filter((_, i) => i !== index);
     setTextareas(newValues);
   };
@@ -122,13 +122,13 @@ function App() {
                       textarea.valid ? "" : "border-red-500"
                     }`}>
                     <textarea
-                      className={`p-[10px] min-w-fit w-full min-h-[250px] h-full text-black ${
+                      className={`p-[10px] min-w-fit w-full min-h-[10px] h-full text-black ${
                         textarea.valid ? "" : "border-red-500"
                       }`}
                       value={textarea.value}
-                      rows={5}
+                      rows={3}
                       placeholder='Enter valid JSON here'
-                      onChange={e =>
+                      onChange={(e) =>
                         handleTextareaChange(index, e.target.value)
                       }
                     />
